@@ -1056,7 +1056,8 @@ void printbmsstat() {
     SERIALCONSOLE.print("| Key ON |");
   }
   if (balancecells == 1) {
-    SERIALCONSOLE.print("|Balancing Active");
+    SERIALCONSOLE.print("|Balancing Active - ");
+    SERIALCONSOLE.print(bms.getBalancing());
   }
   SERIALCONSOLE.print("  ");
   SERIALCONSOLE.print(cellspresent);

@@ -1051,7 +1051,7 @@ int BMSModuleManager::getBalancing() {
   for (int y = 1; y < 63; y++) {
     if (modules[y].isExisting()) {
       x = modules[y].getBalStat();
-      for (uint8_t i = 0; i < 13; i++)  //i < 8; ++i)
+      for (uint8_t i = 0; i < 32; i++)  //i < 8; ++i)
       {
         if (x & 0x01)  //chicking if bit is set
         {
