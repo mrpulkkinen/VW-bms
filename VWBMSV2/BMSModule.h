@@ -5,6 +5,7 @@ class BMSModule
 {
   public:
     BMSModule();
+      void decodebalVW(CAN_message_t &msg);
     void decodecan(int Id, CAN_message_t &msg);
     void decodetemp(CAN_message_t &msg, int y);
     void clearmodule();

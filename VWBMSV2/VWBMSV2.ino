@@ -38,7 +38,7 @@ EEPROMSettings settings;
 
 
 /////Version Identifier/////////
-int firmver = 240327;
+int firmver = 240329;
 
 //Curent filter//
 float filterFrequency = 5.0;
@@ -2841,6 +2841,15 @@ void canread() {
       bms.decodecan(inMsg, 1);  //do VW BMS if ids are ones identified to be modules
     } else {
       bms.decodecan(inMsg, 0);  //do VW BMS if ids are ones identified to be modules
+    }
+  }
+
+  if ((inMsg.id & 0x1FFFFFFF) < 0x16A95480 && (inMsg.id & 0x1FFFFFFF) > 0x16A95470)  // Determine if ID is Temperature CAN-ID FOR MEB
+  {
+    if (candebug == 1) {
+      bms.decodebal(inMsg, 1, 0);
+    } else {
+      bms.decodebal(inMsg, 0, 0);
     }
   }
 

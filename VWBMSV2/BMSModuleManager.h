@@ -9,6 +9,7 @@ class BMSModuleManager
     BMSModuleManager();
     int seriescells();
     void clearmodules();
+    void decodebal(CAN_message_t &msg, int debug, int offset);
     void decodecan(CAN_message_t &msg, int debug);
     void decodetemp(CAN_message_t &msg, int debug, int type);
     void getAllVoltTemp();

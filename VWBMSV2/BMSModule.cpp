@@ -43,6 +43,11 @@ void BMSModule::clearmodule()
   moduleAddress = 0;
 }
 
+void BMSModule::decodebalVW(CAN_message_t &msg) {
+  balstat = 0;
+  balstat = (msg.buf[1] >>4) | (msg.buf[2] << 4)| (msg.buf[3] << 12); 
+}
+
 void BMSModule::decodetemp(CAN_message_t &msg, int y)
 {
   if (y==1) //0x00 in byte 2 means its an MEB message
