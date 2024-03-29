@@ -40,6 +40,7 @@ class BMSModuleManager
     void printPackDetails(int digits);
 int getNumModules();
     bool checkcomms();
+      int getBalancing();
 
   private:
     float packVolt;                         // All modules added together
@@ -60,6 +61,7 @@ int getNumModules();
      bool balancing;
      uint8_t balcnt;
     int spack;
+    int CellsBalancing;
     /*
       void sendBatterySummary();
       void sendModuleSummary(int module);

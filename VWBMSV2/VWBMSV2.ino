@@ -3401,13 +3401,11 @@ void dashupdate() {
   Serial2.write(0xff);
   Serial2.write(0xff);
   Serial2.write(0xff);
-  /*
-    Serial2.print("cellbal.val=");
-    Serial2.print(bms.getBalancing());
-    Serial2.write(0xff);  // We always have to send this three lines after each command sent to the nextion display.
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-  */
+  Serial2.print("cellbal.val=");
+  Serial2.print(bms.getBalancing());
+  Serial2.write(0xff);  // We always have to send this three lines after each command sent to the nextion display.
+  Serial2.write(0xff);
+  Serial2.write(0xff);
 }
 
 

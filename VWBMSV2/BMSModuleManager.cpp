@@ -352,7 +352,7 @@ void BMSModuleManager::balanceCells(int debug) {
 
 void BMSModuleManager::decodebal(CAN_message_t &msg, int debug, int offset) {
   int CMU = 0;
-  CMU = (msg.id & 0x0F) + 1;
+  CMU = (msg.id & 0x0F);
 
   if (CMU > 0 && CMU < 15) {
     modules[CMU + offset].decodebalVW(msg);
@@ -1042,4 +1042,24 @@ void BMSModuleManager::printAllCSV(unsigned long timestamp, float current, int S
       }
     }
   }
+}
+
+int BMSModuleManager::getBalancing() {
+  uint32_t x = 0;
+  CellsBalancing = 0;
+
+  for (int y = 1; y < 63; y++) {
+    if (modules[y].isExisting()) {
+      x = modules[y].getBalStat();
+      for (uint8_t i = 0; i < 13; i++)  //i < 8; ++i)
+      {
+        if (x & 0x01)  //chicking if bit is set
+        {
+          ++CellsBalancing;  //Bit set fount
+        }
+        x = x >> 1;  //x is shifted right by 1-bit and then assigned back to x
+      }
+    }
+  }
+  return CellsBalancing;
 }
