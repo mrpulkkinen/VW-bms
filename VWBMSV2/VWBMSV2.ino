@@ -1059,8 +1059,10 @@ void printbmsstat() {
     SERIALCONSOLE.print("|Balancing Active - ");
     SERIALCONSOLE.print(bms.getBalancing());
   }
-  SERIALCONSOLE.print("  ");
+  SERIALCONSOLE.print(" / ");
   SERIALCONSOLE.print(cellspresent);
+  SERIALCONSOLE.print("  |SOH: ");
+  SERIALCONSOLE.print(SOH);
   SERIALCONSOLE.println();
   SERIALCONSOLE.print("Out:");
   SERIALCONSOLE.print(digitalRead(OUT1));
@@ -1486,6 +1488,11 @@ void VEcan()  //communication with Victron system over CAN
     Can0.write(msg);
 
     delay(2);
+
+
+    SOH = ((bms.getHighCellVolt() - bms.getLowCellVolt())) * 1000;
+    SOH = map(SOH, 0, 500, 100, 0);
+    SOH = max(SOH, 0);
 
     msg.id = 0x355;
     msg.len = 8;
@@ -3401,10 +3408,10 @@ void dashupdate() {
   Serial2.write(0xff);  // We always have to send this three lines after each command sent to the nextion display.
   Serial2.write(0xff);
   Serial2.write(0xff);
-  Serial2.write(0xff);
   Serial2.print("cellbal.val=");
   Serial2.print(bms.getBalancing());
   Serial2.write(0xff);  // We always have to send this three lines after each command sent to the nextion display.
+  Serial2.write(0xff);
   Serial2.write(0xff);
   Serial2.write(0xff);
 }
